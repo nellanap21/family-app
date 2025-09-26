@@ -58,8 +58,8 @@ export async function fetchCardData() {
     const logCountPromise = sql`SELECT COUNT(*) FROM logs`;
     const memberCountPromise = sql`SELECT COUNT(*) FROM members`;
     const logStatusPromise = sql`SELECT
-         SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
-         SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+         SUM(CASE WHEN status = 'happy' THEN amount ELSE 0 END) AS "happy",
+         SUM(CASE WHEN status = 'sad' THEN amount ELSE 0 END) AS "sad"
          FROM logs`;
 
     const data = await Promise.all([
@@ -70,14 +70,14 @@ export async function fetchCardData() {
 
     const numberOfLogs = Number(data[0][0].count ?? '0');
     const numberOfMembers = Number(data[1][0].count ?? '0');
-    const totalPaidLogs = formatCurrency(data[2][0].paid ?? '0');
-    const totalPendingLogs = formatCurrency(data[2][0].pending ?? '0');
+    const totalHappyLogs = formatCurrency(data[2][0].happy ?? '0');
+    const totalSadLogs = formatCurrency(data[2][0].sad ?? '0');
 
     return {
       numberOfMembers,
       numberOfLogs,
-      totalPaidLogs,
-      totalPendingLogs,
+      totalHappyLogs,
+      totalSadLogs,
     };
   } catch (error) {
     console.error('Database Error:', error);
@@ -193,8 +193,8 @@ export async function fetchFilteredMembers(query: string) {
 		  members.email,
 		  members.image_url,
 		  COUNT(logs.id) AS total_logs,
-		  SUM(CASE WHEN logs.status = 'pending' THEN logs.amount ELSE 0 END) AS total_pending,
-		  SUM(CASE WHEN logs.status = 'paid' THEN logs.amount ELSE 0 END) AS total_paid
+		  SUM(CASE WHEN logs.status = 'sad' THEN logs.amount ELSE 0 END) AS total_sad,
+		  SUM(CASE WHEN logs.status = 'happy' THEN logs.amount ELSE 0 END) AS total_happy
 		FROM members
 		LEFT JOIN logs ON members.id = logs.member_id
 		WHERE
@@ -206,8 +206,8 @@ export async function fetchFilteredMembers(query: string) {
 
     const members = data.map((member) => ({
       ...member,
-      total_pending: formatCurrency(member.total_pending),
-      total_paid: formatCurrency(member.total_paid),
+      total_sad: formatCurrency(member.total_sad),
+      total_happy: formatCurrency(member.total_happy),
     }));
 
     return members;

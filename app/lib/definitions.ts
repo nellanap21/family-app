@@ -24,7 +24,7 @@ export type Log = {
   amount: number;
   date: string;
   // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
+  // It means that the "status" property can only be one of the two strings: 'sad' or 'happy'.
   status: 'sad' | 'happy';
 };
 

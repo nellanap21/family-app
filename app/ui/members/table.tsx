@@ -75,10 +75,10 @@ export default async function MembersTable({
                       Total Logs
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
-                      Total Pending
+                      Total Sad
                     </th>
                     <th scope="col" className="px-4 py-5 font-medium">
-                      Total Paid
+                      Total Happy
                     </th>
                   </tr>
                 </thead>

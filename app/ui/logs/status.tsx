@@ -12,15 +12,15 @@ export default function LogStatus({ status }: { status: string }) {
         },
       )}
     >
-      {status === 'pending' ? (
+      {status === 'sad' ? (
         <>
-          Pending
+          Sad
           <ClockIcon className="ml-1 w-4 text-gray-500" />
         </>
       ) : null}
-      {status === 'paid' ? (
+      {status === 'happy' ? (
         <>
-          Paid
+          Happy
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
