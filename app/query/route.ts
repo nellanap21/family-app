@@ -1,26 +1,26 @@
-// import postgres from 'postgres';
+import postgres from 'postgres';
 
-// const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
-// async function listLogs() {
-// 	const data = await sql`
-//     SELECT logs.amount, customers.name
-//     FROM logs
-//     JOIN customers ON logs.customer_id = customers.id
-//     WHERE logs.amount = 666;
-//   `;
+async function listLogs() {
+	const data = await sql`
+    SELECT logs.amount, members.name
+    FROM logs
+    JOIN members ON logs.member_id = members.id
+    WHERE logs.amount = 500;
+  `;
 
-// 	return data;
-// }
+	return data;
+}
 
 export async function GET() {
-  return Response.json({
-    message:
-      'Uncomment this file and remove this line. You can delete this file when you are finished.',
-  });
-  // try {
-  // 	return Response.json(await listLogs());
-  // } catch (error) {
-  // 	return Response.json({ error }, { status: 500 });
-  // }
+  // return Response.json({
+  //   message:
+  //     'Uncomment this file and remove this line. You can delete this file when you are finished.',
+  // });
+  try {
+  	return Response.json(await listLogs());
+  } catch (error) {
+  	return Response.json({ error }, { status: 500 });
+  }
 }

@@ -27,5 +27,8 @@ Followed by `pnpm dev` to start the development server.
 ## Database 
 - **Supabase** provides the database. Here is the [documentation](https://supabase.com/docs). 
 - An API you can access in the browser will run a seed script to populate the database with an initial set of data.
-- The script uses *SQL* to create the tables, and the data from `placeholder-data.ts` file to populate them after they've been created.
+- The script uses **SQL** to create the tables, and the data from `placeholder-data.ts` file to populate them after they've been created.
 - Ensure your local development server is running with `pnpm run dev` and navigate to `localhost:3000/seed` 
+- To make sure everything is working as expected, use another Router Handler, `app/query/route.ts`, to query the database. Inside this file, you'll find a `listLogs()` function. Navigate to `localhost:3000/query` in your browser. You should see that a log `amount` and `name` is returned.
+
+
