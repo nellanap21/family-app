@@ -20,7 +20,7 @@ Followed by `pnpm dev` to start the development server.
 ## Tech Stack
 - **Tailwind** is a CSS framework that speeds up the development process by allowing you to quickly write utility classes directly in your React code. Here is the [documentation](https://tailwindcss.com/docs/installation/using-vite). 
 - **clsx** is a library that lets you toggle class names easily. Look at [documentation](https://github.com/lukeed/clsx) for more details.
-- postgres
+- **postgres** is a modern, lightweight Postgres client for Node.js (alternative to pg).
 - nextjs
 - react
 

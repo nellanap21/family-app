@@ -32,7 +32,8 @@ export async function fetchRevenue() {
 
 export async function fetchLatestLogs() {
   try {
-    const data = await sql<LatestLogRaw[]>`
+    // tells TypeScript the result will be an array of LatestLogRaw objects
+    const data = await sql<LatestLogRaw[]>` 
       SELECT logs.amount, members.name, members.image_url, members.email, logs.id
       FROM logs
       JOIN members ON logs.member_id = members.id
@@ -40,8 +41,8 @@ export async function fetchLatestLogs() {
       LIMIT 5`;
 
     const latestLogs = data.map((log) => ({
-      ...log,
-      amount: formatCurrency(log.amount),
+      ...log, 
+      amount: formatCurrency(log.amount), 
     }));
     return latestLogs;
   } catch (error) {
