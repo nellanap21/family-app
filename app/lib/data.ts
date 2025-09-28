@@ -30,6 +30,7 @@ export async function fetchRevenue() {
   }
 }
 
+// use SQL to only fetch the data you needed, instead of fetching everything and filtering in JavaScript
 export async function fetchLatestLogs() {
   try {
     // tells TypeScript the result will be an array of LatestLogRaw objects
@@ -51,6 +52,7 @@ export async function fetchLatestLogs() {
   }
 }
 
+// Parallelize data fetching with JavaScript - where it made sense to do so
 export async function fetchCardData() {
   try {
     // You can probably combine these into a single SQL query

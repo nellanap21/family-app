@@ -9,6 +9,7 @@ import CardWrapper from '@/app/ui/dashboard/cards';
 
 
 // The page is an async server component. This allows you to use await to fetch data.
+// wrap components in suspense and have a fallback skeleton
 export default async function Page() {
 
   return (

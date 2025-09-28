@@ -5,7 +5,9 @@ import { lusitana } from '@/app/ui/fonts';
 import { LatestLog } from '@/app/lib/definitions';
 import { fetchLatestLogs } from '@/app/lib/data';
 
-export default async function LatestInvoices() { // Remove props
+// Move data fetching down to the components that need it, 
+// thus isolating which parts of your routes should be dynamic.
+export default async function LatestInvoices() { 
   const latestLogs = await fetchLatestLogs();
 
   return (
