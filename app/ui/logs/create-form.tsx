@@ -7,10 +7,13 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+import { createLog } from '@/app/lib/actions';
+
 
 export default function Form({ members }: { members: MemberField[] }) {
   return (
-    <form>
+    // in react, action attribute is a special prop that lets you call server actions
+    <form action={createLog}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Member Name */}
         <div className="mb-4">
