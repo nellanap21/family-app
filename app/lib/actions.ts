@@ -37,12 +37,20 @@ export async function createLog(formData: FormData) {
 
   const amountInCents = amount * 100; // convert amount to cents
   const date = new Date().toISOString().split('T')[0]; // create a new date with the format "YYYY-MM-DD"
+  try {
+    // runs sql query to insert a new log into the database
+    await sql`
+        INSERT INTO logs (member_id, amount, status, date)
+        VALUES (${memberId}, ${amountInCents}, ${status}, ${date})
+    `;
+  } catch (error) {
+    // We'll also log the error to the console for now
+    console.error(error);
+    return {
+      message: 'Database Error: Failed to Create Log.',
+    };
+  }
 
-  // runs sql query to insert a new log into the database
-  await sql`
-    INSERT INTO logs (member_id, amount, status, date)
-    VALUES (${memberId}, ${amountInCents}, ${status}, ${date})
-  `;
 
   // Next.js has a client-side router cache that stores the route segments 
   // in the user's browser. Since you're updating the data displayed 
@@ -64,17 +72,31 @@ export async function updateLog(id: string, formData: FormData) {
  
   const amountInCents = amount * 100;
  
-  await sql`
-    UPDATE logs
-    SET member_id = ${memberId}, amount = ${amountInCents}, status = ${status}
-    WHERE id = ${id}
-  `;
- 
+  try {
+    await sql`
+        UPDATE logs
+        SET member_id = ${memberId}, amount = ${amountInCents}, status = ${status}
+        WHERE id = ${id}
+    `;
+  } catch (error) {
+    // We'll also log the error to the console for now
+    console.error(error);
+    return { message: 'Database Error: Failed to Update Log.' };
+  }
+
+  // redirect is being called outside of the try/catch block. 
+  // this is because redirect works by throwing an error, 
+  // which would be caught by the catch block. To avoid this, 
+  // you can call redirect after try/catch. 
+  // redirect would only be reachable if try is successful.
   revalidatePath('/dashboard/logs');
   redirect('/dashboard/logs');
 }
 
 export async function deleteLog(id: string) {
+	// next line simulates an uncaught exception in this action
+	throw new Error('Failed to Delete Invoice');
+  
   await sql`DELETE FROM logs WHERE id = ${id}`;
   revalidatePath('/dashboard/logs');
 
