@@ -1,5 +1,6 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { deleteLog } from '@/app/lib/actions';
 
 export function CreateLog() {
   return (
@@ -14,9 +15,10 @@ export function CreateLog() {
 }
 
 export function UpdateLog({ id }: { id: string }) {
+  // note that the href has to use tick to support id variable
   return (
     <Link
-      href="/dashboard/logs"
+      href={`/dashboard/logs/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -25,12 +27,16 @@ export function UpdateLog({ id }: { id: string }) {
 }
 
 export function DeleteLog({ id }: { id: string }) {
+  // pass the id to the Server Action using bind
+  const deleteLogWithId = deleteLog.bind(null, id);
+
+  // wrap the delete button in a <form> element  
   return (
-    <>
+    <form action={deleteLogWithId}>
       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+    </form>
   );
 }

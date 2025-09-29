@@ -24,6 +24,7 @@ const FormSchema = z.object({
 });
 
 const CreateLog = FormSchema.omit({ id: true, date: true });
+const UpdateLog = FormSchema.omit({ id: true, date: true });
 
 // extract the values of formData
 export async function createLog(formData: FormData) {
@@ -52,4 +53,31 @@ export async function createLog(formData: FormData) {
   // now redirect the user back to the /dashboard/logs page
   redirect('/dashboard/logs');
 
+}
+
+export async function updateLog(id: string, formData: FormData) {
+  const { memberId, amount, status } = UpdateLog.parse({
+    memberId: formData.get('memberId'),
+    amount: formData.get('amount'),
+    status: formData.get('status'),
+  });
+ 
+  const amountInCents = amount * 100;
+ 
+  await sql`
+    UPDATE logs
+    SET member_id = ${memberId}, amount = ${amountInCents}, status = ${status}
+    WHERE id = ${id}
+  `;
+ 
+  revalidatePath('/dashboard/logs');
+  redirect('/dashboard/logs');
+}
+
+export async function deleteLog(id: string) {
+  await sql`DELETE FROM logs WHERE id = ${id}`;
+  revalidatePath('/dashboard/logs');
+
+  // Since this action is being called in the /dashboard/logs path, 
+  // you don't need to call redirect. 
 }

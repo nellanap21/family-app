@@ -9,16 +9,22 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
+import { updateLog } from '@/app/lib/actions';
 
-export default function EditLogeForm({
+
+export default function EditLogForm({
   log,
   members,
 }: {
   log: LogForm;
   members: MemberField[];
 }) {
+  // You can pass id to the Server Action using JS bind. 
+  // This will ensure that any values passed to the Server Action are encoded.
+  const updateLogWithId = updateLog.bind(null, log.id);
+
   return (
-    <form>
+    <form action={updateLogWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Member Name */}
         <div className="mb-4">
@@ -116,7 +122,7 @@ export default function EditLogeForm({
         >
           Cancel
         </Link>
-        <Button type="submit">Edit Invoice</Button>
+        <Button type="submit">Edit Log</Button>
       </div>
     </form>
   );
