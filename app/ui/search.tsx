@@ -11,10 +11,12 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
   // captures the user's input
   const handleSearch = useDebouncedCallback((term) => {
-    console.log(`Searching... ${term}`);
-
-    {/* creates a mutable copy of the current query string parameters, */}
+    {/* creates a mutable copy of the current query string parameters */}
     const params = new URLSearchParams(searchParams);
+
+    {/*when the user types a new search query, reset the page number to 1 */}
+    params.set('page', '1');
+
     if (term) {
       params.set('query', term);
     } else {
