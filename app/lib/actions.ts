@@ -16,10 +16,10 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 // This schema will validate the formData before saving it to a database.
 
 const FormSchema = z.object({
-  id: z.string({
-		invalid_type_error: 'Please select a member',
+  id: z.string(),
+  memberId: z.string({
+		invalid_type_error: 'Please select a member.',
 	}),
-  memberId: z.string(),
   amount: z.coerce.number()
 		.gt(0, { message: 'Please enter an amount greater than 0.'}), // automatically coerce from string to number
   status: z.enum(['sad', 'happy'], {
