@@ -16,27 +16,51 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 // This schema will validate the formData before saving it to a database.
 
 const FormSchema = z.object({
-  id: z.string(),
+  id: z.string({
+		invalid_type_error: 'Please select a member',
+	}),
   memberId: z.string(),
-  amount: z.coerce.number(), // automatically coerce from string to number
-  status: z.enum(['sad', 'happy']),
+  amount: z.coerce.number()
+		.gt(0, { message: 'Please enter an amount greater than 0.'}), // automatically coerce from string to number
+  status: z.enum(['sad', 'happy'], {
+		invalid_type_error: 'Please select an invoice status.',
+	}),
   date: z.string(),
 });
 
 const CreateLog = FormSchema.omit({ id: true, date: true });
 const UpdateLog = FormSchema.omit({ id: true, date: true });
 
+export type State = {
+  errors?: {
+    memberId?: string[];
+    amount?: string[];
+    status?: string[];
+  };
+  message?: string | null;
+};
+
 // extract the values of formData
-export async function createLog(formData: FormData) {
+export async function createLog(prevState: State, formData: FormData) {
   // pass  raw form data to CreateLog to validate the types:
-  const { memberId, amount, status } = CreateLog.parse({
+  const validatedFields = CreateLog.safeParse({
     memberId: formData.get('memberId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
 
+	// If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Log.',
+    };
+  }
+
+	const { memberId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100; // convert amount to cents
   const date = new Date().toISOString().split('T')[0]; // create a new date with the format "YYYY-MM-DD"
+
   try {
     // runs sql query to insert a new log into the database
     await sql`
@@ -95,7 +119,7 @@ export async function updateLog(id: string, formData: FormData) {
 
 export async function deleteLog(id: string) {
 	// next line simulates an uncaught exception in this action
-	throw new Error('Failed to Delete Invoice');
+	// throw new Error('Failed to Delete Invoice');
   
   await sql`DELETE FROM logs WHERE id = ${id}`;
   revalidatePath('/dashboard/logs');
