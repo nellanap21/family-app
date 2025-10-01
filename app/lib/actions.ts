@@ -87,13 +87,25 @@ export async function createLog(prevState: State, formData: FormData) {
 
 }
 
-export async function updateLog(id: string, formData: FormData) {
-  const { memberId, amount, status } = UpdateLog.parse({
+export async function updateLog(
+	id: string, 
+	prevState: State, 
+	formData: FormData,
+) {
+	const validatedFields = UpdateLog.safeParse({
     memberId: formData.get('memberId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
  
+	if (!validatedFields.success) {
+		return {
+			errors: validatedFields.error.flatten().fieldErrors,
+			message: 'Missing Fields. Failed to Update Log.',
+		};
+	}
+
+	const { memberId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
  
   try {

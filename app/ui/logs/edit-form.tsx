@@ -9,8 +9,8 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import { updateLog } from '@/app/lib/actions';
-
+import { updateLog, State } from '@/app/lib/actions';
+import { useActionState } from 'react';
 
 export default function EditLogForm({
   log,
@@ -19,12 +19,15 @@ export default function EditLogForm({
   log: LogForm;
   members: MemberField[];
 }) {
+  const initialState: State = { message: null, errors: {} };
   // You can pass id to the Server Action using JS bind. 
   // This will ensure that any values passed to the Server Action are encoded.
   const updateLogWithId = updateLog.bind(null, log.id);
+  const [state, formAction] = useActionState(updateLogWithId, initialState);
+
 
   return (
-    <form action={updateLogWithId}>
+    <form action={formAction}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Member Name */}
         <div className="mb-4">

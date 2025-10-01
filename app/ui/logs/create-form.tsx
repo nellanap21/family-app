@@ -30,7 +30,7 @@ export default function Form({ members }: { members: MemberField[] }) {
               name="memberId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue=""
-              aria-describedby="customer-error"
+              aria-describedby="member-error"
             >
               <option value="" disabled>
                 Select a member
@@ -43,6 +43,8 @@ export default function Form({ members }: { members: MemberField[] }) {
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
+
+          {/* you can access the errors using the form state. */}
           <div id="member-error" aria-live="polite" aria-atomic="true">
           {state.errors?.memberId &&
             state.errors.memberId.map((error: string) => (
@@ -51,6 +53,7 @@ export default function Form({ members }: { members: MemberField[] }) {
               </p>
             ))}
           </div>
+
         </div>
 
         {/* Log Amount */}
