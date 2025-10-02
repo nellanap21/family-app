@@ -7,7 +7,6 @@ import {
   LatestLogRaw,
   Revenue,
 } from './definitions';
-import { formatCurrency } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -35,7 +34,7 @@ export async function fetchLatestLogs() {
   try {
     // tells TypeScript the result will be an array of LatestLogRaw objects
     const data = await sql<LatestLogRaw[]>` 
-      SELECT logs.amount, members.name, members.image_url, members.email, logs.id
+      SELECT members.name, members.image_url, members.email, logs.id
       FROM logs
       JOIN members ON logs.member_id = members.id
       ORDER BY logs.date DESC
@@ -43,7 +42,6 @@ export async function fetchLatestLogs() {
 
     const latestLogs = data.map((log) => ({
       ...log, 
-      amount: formatCurrency(log.amount), 
     }));
     return latestLogs;
   } catch (error) {
@@ -61,8 +59,8 @@ export async function fetchCardData() {
     const logCountPromise = sql`SELECT COUNT(*) FROM logs`;
     const memberCountPromise = sql`SELECT COUNT(*) FROM members`;
     const logStatusPromise = sql`SELECT
-         SUM(CASE WHEN status = 'happy' THEN amount ELSE 0 END) AS "happy",
-         SUM(CASE WHEN status = 'sad' THEN amount ELSE 0 END) AS "sad"
+         SUM(CASE WHEN status = 'happy' THEN 1 ELSE 0 END) AS "happy",
+         SUM(CASE WHEN status = 'sad' THEN 1 ELSE 0 END) AS "sad"
          FROM logs`;
 
     const data = await Promise.all([
@@ -73,8 +71,8 @@ export async function fetchCardData() {
 
     const numberOfLogs = Number(data[0][0].count ?? '0');
     const numberOfMembers = Number(data[1][0].count ?? '0');
-    const totalHappyLogs = formatCurrency(data[2][0].happy ?? '0');
-    const totalSadLogs = formatCurrency(data[2][0].sad ?? '0');
+    const totalHappyLogs = data[2][0].happy ?? '0';
+    const totalSadLogs = data[2][0].sad ?? '0';
 
     return {
       numberOfMembers,
@@ -99,7 +97,6 @@ export async function fetchFilteredLogs(
     const logs = await sql<LogsTable[]>`
       SELECT
         logs.id,
-        logs.amount,
         logs.date,
         logs.status,
         members.name,
@@ -110,7 +107,6 @@ export async function fetchFilteredLogs(
       WHERE
         members.name ILIKE ${`%${query}%`} OR
         members.email ILIKE ${`%${query}%`} OR
-        logs.amount::text ILIKE ${`%${query}%`} OR
         logs.date::text ILIKE ${`%${query}%`} OR
         logs.status ILIKE ${`%${query}%`}
       ORDER BY logs.date DESC
@@ -132,7 +128,6 @@ export async function fetchLogsPages(query: string) {
     WHERE
       members.name ILIKE ${`%${query}%`} OR
       members.email ILIKE ${`%${query}%`} OR
-      logs.amount::text ILIKE ${`%${query}%`} OR
       logs.date::text ILIKE ${`%${query}%`} OR
       logs.status ILIKE ${`%${query}%`}
   `;
@@ -151,7 +146,6 @@ export async function fetchLogById(id: string) {
       SELECT
         logs.id,
         logs.member_id,
-        logs.amount,
         logs.status
       FROM logs
       WHERE logs.id = ${id};
@@ -159,8 +153,6 @@ export async function fetchLogById(id: string) {
 
     const log = data.map((log) => ({
       ...log,
-      // Convert amount from cents to dollars
-      amount: log.amount / 100,
     }));
 
     return log[0];
@@ -196,8 +188,8 @@ export async function fetchFilteredMembers(query: string) {
 		  members.email,
 		  members.image_url,
 		  COUNT(logs.id) AS total_logs,
-		  SUM(CASE WHEN logs.status = 'sad' THEN logs.amount ELSE 0 END) AS total_sad,
-		  SUM(CASE WHEN logs.status = 'happy' THEN logs.amount ELSE 0 END) AS total_happy
+		  SUM(CASE WHEN logs.status = 'sad' THEN 1 ELSE 0 END) AS total_sad,
+		  SUM(CASE WHEN logs.status = 'happy' THEN 1 ELSE 0 END) AS total_happy
 		FROM members
 		LEFT JOIN logs ON members.id = logs.member_id
 		WHERE
@@ -209,8 +201,8 @@ export async function fetchFilteredMembers(query: string) {
 
     const members = data.map((member) => ({
       ...member,
-      total_sad: formatCurrency(member.total_sad),
-      total_happy: formatCurrency(member.total_happy),
+      total_sad: member.total_sad,
+      total_happy: member.total_happy,
     }));
 
     return members;

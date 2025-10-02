@@ -45,11 +45,6 @@ export default async function LatestInvoices() {
                     </p>
                   </div>
                 </div>
-                <p
-                  className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
-                >
-                  {log.amount}
-                </p>
               </div>
             );
           })}

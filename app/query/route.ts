@@ -4,10 +4,9 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 async function listLogs() {
 	const data = await sql`
-    SELECT logs.amount, members.name
+    SELECT members.name
     FROM logs
     JOIN members ON logs.member_id = members.id
-    WHERE logs.amount = 500;
   `;
 
 	return data;

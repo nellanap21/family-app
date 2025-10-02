@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { UpdateLog, DeleteLog } from '@/app/ui/logs/buttons';
 import LogStatus from '@/app/ui/logs/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
+import { formatDateToLocal } from '@/app/lib/utils';
 import { fetchFilteredLogs } from '@/app/lib/data';
 
 export default async function LogsTable({
@@ -41,9 +41,6 @@ export default async function LogsTable({
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
-                      {formatCurrency(log.amount)}
-                    </p>
                     <p>{formatDateToLocal(log.date)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
@@ -62,9 +59,6 @@ export default async function LogsTable({
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Email
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
@@ -97,9 +91,6 @@ export default async function LogsTable({
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {log.email}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(log.amount)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(log.date)}

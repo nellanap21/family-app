@@ -20,8 +20,6 @@ const FormSchema = z.object({
   memberId: z.string({
 		invalid_type_error: 'Please select a member.',
 	}),
-  amount: z.coerce.number()
-		.gt(0, { message: 'Please enter an amount greater than 0.'}), // automatically coerce from string to number
   status: z.enum(['sad', 'happy'], {
 		invalid_type_error: 'Please select an log status.',
 	}),
@@ -34,7 +32,6 @@ const UpdateLog = FormSchema.omit({ id: true, date: true });
 export type State = {
   errors?: {
     memberId?: string[];
-    amount?: string[];
     status?: string[];
   };
   message?: string | null;
@@ -45,7 +42,6 @@ export async function createLog(prevState: State, formData: FormData) {
   // pass  raw form data to CreateLog to validate the types:
   const validatedFields = CreateLog.safeParse({
     memberId: formData.get('memberId'),
-    amount: formData.get('amount'),
     status: formData.get('status'),
   });
 
@@ -57,15 +53,14 @@ export async function createLog(prevState: State, formData: FormData) {
     };
   }
 
-	const { memberId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100; // convert amount to cents
+	const { memberId, status } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0]; // create a new date with the format "YYYY-MM-DD"
 
   try {
     // runs sql query to insert a new log into the database
     await sql`
-        INSERT INTO logs (member_id, amount, status, date)
-        VALUES (${memberId}, ${amountInCents}, ${status}, ${date})
+        INSERT INTO logs (member_id, status, date)
+        VALUES (${memberId}, ${status}, ${date})
     `;
   } catch (error) {
     // We'll also log the error to the console for now
@@ -94,7 +89,6 @@ export async function updateLog(
 ) {
 	const validatedFields = UpdateLog.safeParse({
     memberId: formData.get('memberId'),
-    amount: formData.get('amount'),
     status: formData.get('status'),
   });
  
@@ -105,13 +99,12 @@ export async function updateLog(
 		};
 	}
 
-	const { memberId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100;
+	const { memberId, status } = validatedFields.data;
  
   try {
     await sql`
         UPDATE logs
-        SET member_id = ${memberId}, amount = ${amountInCents}, status = ${status}
+        SET member_id = ${memberId}, status = ${status}
         WHERE id = ${id}
     `;
   } catch (error) {

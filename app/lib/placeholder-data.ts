@@ -51,97 +51,69 @@ const members = [
 const logs = [
   {
     member_id: members[0].id,
-    amount: 15795,
     status: 'sad',
     date: '2022-12-06',
   },
   {
     member_id: members[1].id,
-    amount: 20348,
     status: 'sad',
     date: '2022-11-14',
   },
   {
     member_id: members[4].id,
-    amount: 3040,
     status: 'happy',
     date: '2022-10-29',
   },
   {
     member_id: members[3].id,
-    amount: 44800,
     status: 'happy',
     date: '2023-09-10',
   },
   {
     member_id: members[5].id,
-    amount: 34577,
     status: 'sad',
     date: '2023-08-05',
   },
   {
     member_id: members[2].id,
-    amount: 54246,
     status: 'sad',
     date: '2023-07-16',
   },
   {
     member_id: members[0].id,
-    amount: 666,
     status: 'sad',
     date: '2023-06-27',
   },
   {
     member_id: members[3].id,
-    amount: 32545,
     status: 'happy',
     date: '2023-06-09',
   },
   {
     member_id: members[4].id,
-    amount: 1250,
     status: 'happy',
     date: '2023-06-17',
   },
   {
     member_id: members[5].id,
-    amount: 8546,
     status: 'happy',
     date: '2023-06-07',
   },
   {
     member_id: members[1].id,
-    amount: 500,
     status: 'happy',
     date: '2023-08-19',
   },
   {
     member_id: members[5].id,
-    amount: 8945,
     status: 'happy',
     date: '2023-06-03',
   },
   {
     member_id: members[2].id,
-    amount: 1000,
     status: 'happy',
     date: '2022-06-05',
   },
 ];
 
-const revenue = [
-  { month: 'Jan', revenue: 2000 },
-  { month: 'Feb', revenue: 1800 },
-  { month: 'Mar', revenue: 2200 },
-  { month: 'Apr', revenue: 2500 },
-  { month: 'May', revenue: 2300 },
-  { month: 'Jun', revenue: 3200 },
-  { month: 'Jul', revenue: 3500 },
-  { month: 'Aug', revenue: 3700 },
-  { month: 'Sep', revenue: 2500 },
-  { month: 'Oct', revenue: 2800 },
-  { month: 'Nov', revenue: 3000 },
-  { month: 'Dec', revenue: 4800 },
-];
-
-export { users, members, logs, revenue };
+export { users, members, logs };
