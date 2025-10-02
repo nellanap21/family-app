@@ -23,7 +23,7 @@ const FormSchema = z.object({
   amount: z.coerce.number()
 		.gt(0, { message: 'Please enter an amount greater than 0.'}), // automatically coerce from string to number
   status: z.enum(['sad', 'happy'], {
-		invalid_type_error: 'Please select an invoice status.',
+		invalid_type_error: 'Please select an log status.',
 	}),
   date: z.string(),
 });
