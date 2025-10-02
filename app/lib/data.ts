@@ -59,9 +59,12 @@ export async function fetchCardData() {
     const logCountPromise = sql`SELECT COUNT(*) FROM logs`;
     const memberCountPromise = sql`SELECT COUNT(*) FROM members`;
     const logStatusPromise = sql`SELECT
-         SUM(CASE WHEN status = 'happy' THEN 1 ELSE 0 END) AS "happy",
-         SUM(CASE WHEN status = 'sad' THEN 1 ELSE 0 END) AS "sad"
-         FROM logs`;
+        SUM(CASE WHEN status = 'very happy' THEN 1 ELSE 0 END) AS "very happy",
+        SUM(CASE WHEN status = 'happy' THEN 1 ELSE 0 END) AS "happy",
+        SUM(CASE WHEN status = 'meh' THEN 1 ELSE 0 END) AS "meh",
+        SUM(CASE WHEN status = 'sad' THEN 1 ELSE 0 END) AS "sad",
+        SUM(CASE WHEN status = 'very sad' THEN 1 ELSE 0 END) AS "very sad"
+        FROM logs`;
 
     const data = await Promise.all([
       logCountPromise,
@@ -188,8 +191,11 @@ export async function fetchFilteredMembers(query: string) {
 		  members.email,
 		  members.image_url,
 		  COUNT(logs.id) AS total_logs,
-		  SUM(CASE WHEN logs.status = 'sad' THEN 1 ELSE 0 END) AS total_sad,
-		  SUM(CASE WHEN logs.status = 'happy' THEN 1 ELSE 0 END) AS total_happy
+		  SUM(CASE WHEN logs.status = 'very sad' THEN 1 ELSE 0 END) AS total_very_sad,
+      SUM(CASE WHEN logs.status = 'sad' THEN 1 ELSE 0 END) AS total_sad,
+		  SUM(CASE WHEN logs.status = 'meh' THEN 1 ELSE 0 END) AS total_meh,
+		  SUM(CASE WHEN logs.status = 'happy' THEN 1 ELSE 0 END) AS total_happy,
+		  SUM(CASE WHEN logs.status = 'very happy' THEN 1 ELSE 0 END) AS total_very_happy
 		FROM members
 		LEFT JOIN logs ON members.id = logs.member_id
 		WHERE

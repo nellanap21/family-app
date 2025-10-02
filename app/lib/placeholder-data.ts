@@ -81,12 +81,12 @@ const logs = [
   },
   {
     member_id: members[0].id,
-    status: 'sad',
+    status: 'very sad',
     date: '2023-06-27',
   },
   {
     member_id: members[3].id,
-    status: 'happy',
+    status: 'meh',
     date: '2023-06-09',
   },
   {
@@ -111,7 +111,7 @@ const logs = [
   },
   {
     member_id: members[2].id,
-    status: 'happy',
+    status: 'very happy',
     date: '2022-06-05',
   },
 ];

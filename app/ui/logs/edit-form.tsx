@@ -73,6 +73,23 @@ export default function EditLogForm({
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input
+                  id="very sad"
+                  name="status"
+                  type="radio"
+                  value="very sad"
+                  defaultChecked={log.status === 'very sad'}
+                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                />
+                <label
+                  htmlFor="very sad"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                >
+                  Very Sad <ClockIcon className="h-4 w-4" />
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <input
                   id="sad"
                   name="status"
                   type="radio"
@@ -87,6 +104,24 @@ export default function EditLogForm({
                   Sad <ClockIcon className="h-4 w-4" />
                 </label>
               </div>
+
+              <div className="flex items-center">
+                <input
+                  id="meh"
+                  name="status"
+                  type="radio"
+                  value="meh"
+                  defaultChecked={log.status === 'meh'}
+                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                />
+                <label
+                  htmlFor="meh"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                >
+                  Meh <CheckIcon className="h-4 w-4" />
+                </label>
+              </div>
+
               <div className="flex items-center">
                 <input
                   id="happy"
@@ -103,6 +138,24 @@ export default function EditLogForm({
                   Happy <CheckIcon className="h-4 w-4" />
                 </label>
               </div>
+
+              <div className="flex items-center">
+                <input
+                  id="very happy"
+                  name="status"
+                  type="radio"
+                  value="very happy"
+                  defaultChecked={log.status === 'very happy'}
+                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                />
+                <label
+                  htmlFor="very happy"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                >
+                  Very Happy <CheckIcon className="h-4 w-4" />
+                </label>
+              </div>
+
             </div>
           </div>
         </fieldset>

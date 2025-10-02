@@ -52,7 +52,7 @@ export type LogsTable = {
   image_url: string;
   date: string;
   amount: number;
-  status: 'sad' | 'happy';
+  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
 };
 
 export type MembersTableType = {
@@ -84,5 +84,5 @@ export type LogForm = {
   id: string;
   member_id: string;
   amount: number;
-  status: 'sad' | 'happy';
+  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
 };

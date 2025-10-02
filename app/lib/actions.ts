@@ -20,8 +20,8 @@ const FormSchema = z.object({
   memberId: z.string({
 		invalid_type_error: 'Please select a member.',
 	}),
-  status: z.enum(['sad', 'happy'], {
-		invalid_type_error: 'Please select an log status.',
+  status: z.enum(['very sad', 'sad', 'meh', 'happy', 'very happy'], {
+		invalid_type_error: 'Please select a status.',
 	}),
   date: z.string(),
 });
