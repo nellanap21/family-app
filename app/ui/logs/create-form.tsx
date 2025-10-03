@@ -3,11 +3,15 @@
 import { MemberField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
+import { 
+  FaRegFaceSmileBeam,
+  FaRegFaceSmile,
+  FaRegFaceMeh,
+  FaRegFaceFrown,
+  FaRegFaceTired   
+} from "react-icons/fa6";
 import { Button } from '@/app/ui/button';
 import { createLog, State } from '@/app/lib/actions';
 import { useActionState } from 'react';
@@ -74,9 +78,9 @@ export default function Form({ members }: { members: MemberField[] }) {
                 />
                 <label
                   htmlFor="very sad"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-600 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Very Sad <ClockIcon className="h-4 w-4" />
+                  <FaRegFaceTired className="h-4 w-4"/>
                 </label>
               </div>
 
@@ -90,9 +94,9 @@ export default function Form({ members }: { members: MemberField[] }) {
                 />
                 <label
                   htmlFor="sad"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-400 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Sad <CheckIcon className="h-4 w-4" />
+                  <FaRegFaceFrown className="h-4 w-4" />
                 </label>
               </div>
 
@@ -106,9 +110,9 @@ export default function Form({ members }: { members: MemberField[] }) {
                 />
                 <label
                   htmlFor="meh"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-300 px-3 py-1.5 text-xs font-medium text-gray-800"
                 >
-                  Meh <CheckIcon className="h-4 w-4" />
+                  <FaRegFaceMeh className="h-4 w-4" />
                 </label>
               </div>
 
@@ -122,9 +126,9 @@ export default function Form({ members }: { members: MemberField[] }) {
                 />
                 <label
                   htmlFor="happy"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-sky-400 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Happy <CheckIcon className="h-4 w-4" />
+                  <FaRegFaceSmile className="h-4 w-4" />
                 </label>
               </div>
 
@@ -138,9 +142,9 @@ export default function Form({ members }: { members: MemberField[] }) {
                 />
                 <label
                   htmlFor="very happy"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Very Happy <CheckIcon className="h-4 w-4" />
+                  <FaRegFaceSmileBeam className="h-4 w-4" />
                 </label>
               </div>                            
             </div>

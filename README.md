@@ -32,3 +32,5 @@ Followed by `pnpm dev` to start the development server.
 - To make sure everything is working as expected, use another Router Handler, `app/query/route.ts`, to query the database. Inside this file, you'll find a `listLogs()` function. Navigate to `localhost:3000/query` in your browser. You should see that a log `amount` and `name` is returned.
 
 
+## Icons
+- Icons are taken from **react-icons** library: https://react-icons.github.io/react-icons/search/#q=face

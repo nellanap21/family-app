@@ -1,13 +1,10 @@
-// TODO: fix icons for statuses
-import {
-  CheckIcon,
-  ClockIcon,
-  XCircleIcon,
-  ExclamationTriangleIcon,
-  MinusCircleIcon,
-  CheckCircleIcon,
-  StarIcon,
-} from '@heroicons/react/24/solid';
+import { 
+  FaRegFaceSmileBeam,
+  FaRegFaceSmile,
+  FaRegFaceMeh,
+  FaRegFaceFrown,
+  FaRegFaceTired   
+} from "react-icons/fa6";
 
 import clsx from 'clsx';
 
@@ -17,42 +14,42 @@ export default function LogStatus({ status }: { status: string }) {
       className={clsx(
         'inline-flex items-center rounded-full px-2 py-1 text-xs',
         {
-          'bg-red-500 text-white': status === 'very sad',
-          'bg-red-300 text-white': status === 'sad',
-          'bg-gray-200 text-gray-700': status === 'meh',
-          'bg-blue-300 text-white': status === 'happy',
-          'bg-blue-500 text-white': status === 'very happy',
+          'bg-red-600 text-white': status === 'very sad',
+          'bg-red-400 text-white': status === 'sad',
+          'bg-gray-300 text-gray-800': status === 'meh',
+          'bg-sky-400 text-white': status === 'happy',
+          'bg-blue-600 text-white': status === 'very happy',
         },
       )}
     >
       {status === 'very sad' ? (
         <>
           Very Sad
-          <XCircleIcon className="ml-1 w-4" />
+          <FaRegFaceTired className="ml-1 w-4"/>
         </>
       ) : null}
       {status === 'sad' ? (
         <>
           Sad
-          <ClockIcon className="ml-1 w-4 text-gray-500" />
+          <FaRegFaceFrown className="ml-1 w-4"/>
         </>
       ) : null}
       {status === 'meh' ? (
         <>
           Meh
-          <CheckIcon className="ml-1 w-4 text-white" />
+          <FaRegFaceMeh className="ml-1 w-4"/>
         </>
       ) : null}
       {status === 'happy' ? (
         <>
           Happy
-          <CheckIcon className="ml-1 w-4 text-white" />
+          <FaRegFaceSmile className="ml-1 w-4"/>
         </>
       ) : null}
       {status === 'very happy' ? (
         <>
           Very Happy
-          <CheckIcon className="ml-1 w-4 text-white" />
+          <FaRegFaceSmileBeam className="ml-1 w-4"/>
         </>
       ) : null}
     </span>
