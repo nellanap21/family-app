@@ -9,6 +9,7 @@ export const formatDateToLocal = (
     day: 'numeric',
     month: 'short',
     year: 'numeric',
+    timeZone: 'America/Los_Angeles', // or detect dynamically
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
