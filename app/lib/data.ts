@@ -34,7 +34,7 @@ export async function fetchLatestLogs() {
   try {
     // tells TypeScript the result will be an array of LatestLogRaw objects
     const data = await sql<LatestLogRaw[]>` 
-      SELECT members.name, members.image_url, members.email, logs.id
+      SELECT members.name, members.image_url, logs.id
       FROM logs
       JOIN members ON logs.member_id = members.id
       ORDER BY logs.date DESC
@@ -103,13 +103,11 @@ export async function fetchFilteredLogs(
         logs.date,
         logs.status,
         members.name,
-        members.email,
         members.image_url
       FROM logs
       JOIN members ON logs.member_id = members.id
       WHERE
         members.name ILIKE ${`%${query}%`} OR
-        members.email ILIKE ${`%${query}%`} OR
         logs.date::text ILIKE ${`%${query}%`} OR
         logs.status ILIKE ${`%${query}%`}
       ORDER BY logs.date DESC
@@ -130,7 +128,6 @@ export async function fetchLogsPages(query: string) {
     JOIN members ON logs.member_id = members.id
     WHERE
       members.name ILIKE ${`%${query}%`} OR
-      members.email ILIKE ${`%${query}%`} OR
       logs.date::text ILIKE ${`%${query}%`} OR
       logs.status ILIKE ${`%${query}%`}
   `;
@@ -188,7 +185,6 @@ export async function fetchFilteredMembers(query: string) {
 		SELECT
 		  members.id,
 		  members.name,
-		  members.email,
 		  members.image_url,
 		  COUNT(logs.id) AS total_logs,
 		  SUM(CASE WHEN logs.status = 'very sad' THEN 1 ELSE 0 END) AS total_very_sad,
@@ -199,9 +195,8 @@ export async function fetchFilteredMembers(query: string) {
 		FROM members
 		LEFT JOIN logs ON members.id = logs.member_id
 		WHERE
-		  members.name ILIKE ${`%${query}%`} OR
-        members.email ILIKE ${`%${query}%`}
-		GROUP BY members.id, members.name, members.email, members.image_url
+		  members.name ILIKE ${`%${query}%`} 
+		GROUP BY members.id, members.name, members.image_url
 		ORDER BY members.name ASC
 	  `;
 

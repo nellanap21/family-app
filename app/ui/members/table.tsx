@@ -41,9 +41,6 @@ export default async function MembersTable({
                             <p>{member.name}</p>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-500">
-                          {member.email}
-                        </p>
                       </div>
                     </div>
                     <div className="flex w-full items-center justify-between border-b py-5">
@@ -67,9 +64,6 @@ export default async function MembersTable({
                   <tr>
                     <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                       Name
-                    </th>
-                    <th scope="col" className="px-3 py-5 font-medium">
-                      Email
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
                       Total Logs
@@ -97,9 +91,6 @@ export default async function MembersTable({
                           />
                           <p>{member.name}</p>
                         </div>
-                      </td>
-                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                        {member.email}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {member.total_logs}

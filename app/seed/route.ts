@@ -61,7 +61,6 @@ async function seedMembers() {
     CREATE TABLE IF NOT EXISTS members (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) NOT NULL,
       image_url VARCHAR(255) NOT NULL
     );
   `;
@@ -69,8 +68,8 @@ async function seedMembers() {
   const insertedMembers = await Promise.all(
     members.map(
       (member) => sql`
-        INSERT INTO members (id, name, email, image_url)
-        VALUES (${member.id}, ${member.name}, ${member.email}, ${member.image_url})
+        INSERT INTO members (id, name, image_url)
+        VALUES (${member.id}, ${member.name}, ${member.image_url})
         ON CONFLICT (id) DO NOTHING;
       `,
     ),

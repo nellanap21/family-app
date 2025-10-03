@@ -40,9 +40,6 @@ export default async function LatestInvoices() {
                     <p className="truncate text-sm font-semibold md:text-base">
                       {log.name}
                     </p>
-                    <p className="hidden text-sm text-gray-500 sm:block">
-                      {log.email}
-                    </p>
                   </div>
                 </div>
               </div>

@@ -13,7 +13,6 @@ export type User = {
 export type Member = {
   id: string;
   name: string;
-  email: string;
   image_url: string;
 };
 
@@ -36,7 +35,6 @@ export type LatestLog = {
   id: string;
   name: string;
   image_url: string;
-  email: string;
 };
 
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
@@ -48,7 +46,6 @@ export type LogsTable = {
   id: string;
   member_id: string;
   name: string;
-  email: string;
   image_url: string;
   date: string;
   amount: number;
@@ -58,7 +55,6 @@ export type LogsTable = {
 export type MembersTableType = {
   id: string;
   name: string;
-  email: string;
   image_url: string;
   total_log: number;
   total_happy: number;
@@ -68,7 +64,6 @@ export type MembersTableType = {
 export type FormattedMembersTable = {
   id: string;
   name: string;
-  email: string;
   image_url: string;
   total_logs: number;
   total_sad: string;

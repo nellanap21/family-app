@@ -35,7 +35,6 @@ export default async function LogsTable({
                       />
                       <p>{log.name}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{log.email}</p>
                   </div>
                   <LogStatus status={log.status} />
                 </div>
@@ -56,9 +55,6 @@ export default async function LogsTable({
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                   Member
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
@@ -88,9 +84,6 @@ export default async function LogsTable({
                       />
                       <p>{log.name}</p>
                     </div>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {log.email}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(log.date)}
