@@ -66,7 +66,7 @@ export default function Form({ members }: { members: MemberField[] }) {
             Set the log status
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3" aria-describedby="status-error">
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
 
               <div className="flex items-center">
                 <input
