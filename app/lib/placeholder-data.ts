@@ -1,113 +1,126 @@
 // This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
-const users = [
-  {
-    id: '410544b2-4001-4271-9855-fec4b6a6442a',
-    name: 'User',
-    email: 'user@nextmail.com',
-    password: '123456',
-  },
-];
+// const users = [
+//   {
+//     id: '410544b2-4001-4271-9855-fec4b6a6442a',
+//     name: 'User',
+//     email: 'user@nextmail.com',
+//     password: '123456',
+//   },
+// ];
 
 const members = [
   {
     id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
-    name: 'Evil Rabbit',
-    image_url: '/members/evil-rabbit.png',
+    name: 'Cecily Xi',
+    image_url: '/members/cecily.png',
   },
   {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
-    name: 'Delba de Oliveira',
-    image_url: '/members/delba-de-oliveira.png',
-  },
-  {
-    id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
-    name: 'Lee Robinson',
-    image_url: '/members/lee-robinson.png',
-  },
-  {
-    id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
-    name: 'Michael Novotny',
-    image_url: '/members/michael-novotny.png',
-  },
-  {
-    id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
-    name: 'Amy Burns',
-    image_url: '/members/amy-burns.png',
-  },
-  {
-    id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
-    name: 'Balazs Orban',
-    image_url: '/members/balazs-orban.png',
+    name: 'Allen Pan',
+    image_url: '/members/allen.png',
   },
 ];
 
-const logs = [
-  {
-    member_id: members[0].id,
-    status: 'sad',
-    date: '2022-12-06',
-  },
-  {
-    member_id: members[1].id,
-    status: 'sad',
-    date: '2022-11-14',
-  },
-  {
-    member_id: members[4].id,
-    status: 'happy',
-    date: '2022-10-29',
-  },
-  {
-    member_id: members[3].id,
-    status: 'happy',
-    date: '2023-09-10',
-  },
-  {
-    member_id: members[5].id,
-    status: 'sad',
-    date: '2023-08-05',
-  },
-  {
-    member_id: members[2].id,
-    status: 'sad',
-    date: '2023-07-16',
-  },
-  {
-    member_id: members[0].id,
-    status: 'very sad',
-    date: '2023-06-27',
-  },
-  {
-    member_id: members[3].id,
-    status: 'meh',
-    date: '2023-06-09',
-  },
-  {
-    member_id: members[4].id,
-    status: 'happy',
-    date: '2023-06-17',
-  },
-  {
-    member_id: members[5].id,
-    status: 'happy',
-    date: '2023-06-07',
-  },
-  {
-    member_id: members[1].id,
-    status: 'happy',
-    date: '2023-08-19',
-  },
-  {
-    member_id: members[5].id,
-    status: 'happy',
-    date: '2023-06-03',
-  },
-  {
-    member_id: members[2].id,
-    status: 'very happy',
-    date: '2022-06-05',
-  },
-];
+// const members = [
+//   {
+//     id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
+//     name: 'Evil Rabbit',
+//     image_url: '/members/evil-rabbit.png',
+//   },
+//   {
+//     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+//     name: 'Delba de Oliveira',
+//     image_url: '/members/delba-de-oliveira.png',
+//   },
+//   {
+//     id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
+//     name: 'Lee Robinson',
+//     image_url: '/members/lee-robinson.png',
+//   },
+//   {
+//     id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
+//     name: 'Michael Novotny',
+//     image_url: '/members/michael-novotny.png',
+//   },
+//   {
+//     id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
+//     name: 'Amy Burns',
+//     image_url: '/members/amy-burns.png',
+//   },
+//   {
+//     id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
+//     name: 'Balazs Orban',
+//     image_url: '/members/balazs-orban.png',
+//   },
+// ];
 
-export { users, members, logs };
+// const logs = [
+//   {
+//     member_id: members[0].id,
+//     status: 'sad',
+//     date: '2022-12-06',
+//   },
+//   {
+//     member_id: members[1].id,
+//     status: 'sad',
+//     date: '2022-11-14',
+//   },
+//   {
+//     member_id: members[4].id,
+//     status: 'happy',
+//     date: '2022-10-29',
+//   },
+//   {
+//     member_id: members[3].id,
+//     status: 'happy',
+//     date: '2023-09-10',
+//   },
+//   {
+//     member_id: members[5].id,
+//     status: 'sad',
+//     date: '2023-08-05',
+//   },
+//   {
+//     member_id: members[2].id,
+//     status: 'sad',
+//     date: '2023-07-16',
+//   },
+//   {
+//     member_id: members[0].id,
+//     status: 'very sad',
+//     date: '2023-06-27',
+//   },
+//   {
+//     member_id: members[3].id,
+//     status: 'meh',
+//     date: '2023-06-09',
+//   },
+//   {
+//     member_id: members[4].id,
+//     status: 'happy',
+//     date: '2023-06-17',
+//   },
+//   {
+//     member_id: members[5].id,
+//     status: 'happy',
+//     date: '2023-06-07',
+//   },
+//   {
+//     member_id: members[1].id,
+//     status: 'happy',
+//     date: '2023-08-19',
+//   },
+//   {
+//     member_id: members[5].id,
+//     status: 'happy',
+//     date: '2023-06-03',
+//   },
+//   {
+//     member_id: members[2].id,
+//     status: 'very happy',
+//     date: '2022-06-05',
+//   },
+// ];
+
+export { members };

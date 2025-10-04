@@ -34,7 +34,7 @@ export async function fetchLatestLogs() {
   try {
     // tells TypeScript the result will be an array of LatestLogRaw objects
     const data = await sql<LatestLogRaw[]>` 
-      SELECT members.name, members.image_url, logs.id
+      SELECT members.name, members.image_url, logs.id, logs.status, logs.date
       FROM logs
       JOIN members ON logs.member_id = members.id
       ORDER BY logs.date DESC
@@ -59,11 +59,11 @@ export async function fetchCardData() {
     const logCountPromise = sql`SELECT COUNT(*) FROM logs`;
     const memberCountPromise = sql`SELECT COUNT(*) FROM members`;
     const logStatusPromise = sql`SELECT
-        SUM(CASE WHEN status = 'very happy' THEN 1 ELSE 0 END) AS "very happy",
+        SUM(CASE WHEN status = 'very happy' THEN 1 ELSE 0 END) AS "veryhappy",
         SUM(CASE WHEN status = 'happy' THEN 1 ELSE 0 END) AS "happy",
         SUM(CASE WHEN status = 'meh' THEN 1 ELSE 0 END) AS "meh",
         SUM(CASE WHEN status = 'sad' THEN 1 ELSE 0 END) AS "sad",
-        SUM(CASE WHEN status = 'very sad' THEN 1 ELSE 0 END) AS "very sad"
+        SUM(CASE WHEN status = 'very sad' THEN 1 ELSE 0 END) AS "verysad"
         FROM logs`;
 
     const data = await Promise.all([
@@ -74,14 +74,20 @@ export async function fetchCardData() {
 
     const numberOfLogs = Number(data[0][0].count ?? '0');
     const numberOfMembers = Number(data[1][0].count ?? '0');
-    const totalHappyLogs = data[2][0].happy ?? '0';
+    const totalVerySadLogs = data[2][0].verysad ?? '0';
     const totalSadLogs = data[2][0].sad ?? '0';
+    const totalMehLogs = data[2][0].meh ?? '0';
+    const totalHappyLogs = data[2][0].happy ?? '0';
+    const totalVeryHappyLogs = data[2][0].veryhappy ?? '0';
 
     return {
       numberOfMembers,
       numberOfLogs,
-      totalHappyLogs,
+      totalVerySadLogs,
       totalSadLogs,
+      totalMehLogs,    
+      totalHappyLogs,
+      totalVeryHappyLogs,
     };
   } catch (error) {
     console.error('Database Error:', error);

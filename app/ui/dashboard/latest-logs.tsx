@@ -3,11 +3,13 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { LatestLog } from '@/app/lib/definitions';
+import { formatDateToLocal } from '@/app/lib/utils';
+import LogStatus from '@/app/ui/logs/status';
 import { fetchLatestLogs } from '@/app/lib/data';
 
 // Move data fetching down to the components that need it, 
 // thus isolating which parts of your routes should be dynamic.
-export default async function LatestInvoices() { 
+export default async function LatestLogs() { 
   const latestLogs = await fetchLatestLogs();
 
   return (
@@ -40,8 +42,13 @@ export default async function LatestInvoices() {
                     <p className="truncate text-sm font-semibold md:text-base">
                       {log.name}
                     </p>
+                    {/* React cannot directly render a JavaScript Date object. */}
+                    <p className="hidden text-sm tex-gray-500 sm:block">
+                      {formatDateToLocal(log.date)}
+                    </p>
                   </div>
                 </div>
+                <LogStatus status={log.status} />
               </div>
             );
           })}

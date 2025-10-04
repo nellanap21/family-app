@@ -23,7 +23,8 @@ export type Log = {
   date: string;
   // In TypeScript, this is called a string union type.
   // It means that the "status" property can only be one of the two strings: 'sad' or 'happy'.
-  status: 'sad' | 'happy';
+  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+
 };
 
 export type Revenue = {
@@ -35,6 +36,8 @@ export type LatestLog = {
   id: string;
   name: string;
   image_url: string;
+  date: string;
+  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
 };
 
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
