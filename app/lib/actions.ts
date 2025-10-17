@@ -73,9 +73,10 @@ export async function createLog(prevState: State, formData: FormData) {
 
   // Next.js has a client-side router cache that stores the route segments 
   // in the user's browser. Since you're updating the data displayed 
-  // in the logs route, you want to clear this cache and trigger a
+  // in the logs route and dashboard, you want to clear this cache and trigger a
   // new request to the server so fresh data will be fetched
   revalidatePath('/dashboard/logs');
+  revalidatePath('/dashboard');
 
   // now redirect the user back to the /dashboard/logs page
   redirect('/dashboard/logs');
@@ -119,6 +120,7 @@ export async function updateLog(
   // you can call redirect after try/catch. 
   // redirect would only be reachable if try is successful.
   revalidatePath('/dashboard/logs');
+  revalidatePath('/dashboard');
   redirect('/dashboard/logs');
 }
 
@@ -128,6 +130,7 @@ export async function deleteLog(id: string) {
   
   await sql`DELETE FROM logs WHERE id = ${id}`;
   revalidatePath('/dashboard/logs');
+  revalidatePath('/dashboard');
 
   // Since this action is being called in the /dashboard/logs path, 
   // you don't need to call redirect. 
