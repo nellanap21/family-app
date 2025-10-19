@@ -13,8 +13,8 @@ import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
-  'very sad': FaRegFaceTired,
-  'sad': FaRegFaceFrown,
+  'very unhappy': FaRegFaceTired,
+  'unhappy': FaRegFaceFrown,
   'meh': FaRegFaceMeh,
   'happy': FaRegFaceSmile,
   'very happy': FaRegFaceSmileBeam,
@@ -26,8 +26,8 @@ export default async function CardWrapper() {
   const {
     numberOfLogs,
     numberOfMembers,
-    totalVerySadLogs,
-    totalSadLogs,
+    totalVeryUnhappyLogs,
+    totalUnhappyLogs,
     totalMehLogs,
     totalHappyLogs,
     totalVeryHappyLogs,
@@ -35,8 +35,8 @@ export default async function CardWrapper() {
 
   return (
     <>
-      <Card title="Very Sad" value={totalVerySadLogs} type="very sad" />
-      <Card title="Sad" value={totalSadLogs} type="sad" />
+      <Card title="Very Unhappy" value={totalVeryUnhappyLogs} type="very unhappy" />
+      <Card title="Unhappy" value={totalUnhappyLogs} type="unhappy" />
       <Card title="Happy" value={totalHappyLogs} type="happy" />
       <Card title="Very Happy" value={totalVeryHappyLogs} type="very happy" />
       <Card title="Meh" value={totalMehLogs} type="meh" />
@@ -57,7 +57,7 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'logs' | 'members' | 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  type: 'logs' | 'members' | 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
 }) {
   const Icon = iconMap[type];
 

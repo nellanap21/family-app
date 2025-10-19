@@ -20,7 +20,7 @@ const FormSchema = z.object({
   memberId: z.string({
 		invalid_type_error: 'Please select a member.',
 	}),
-  status: z.enum(['very sad', 'sad', 'meh', 'happy', 'very happy'], {
+  status: z.enum(['very unhappy', 'unhappy', 'meh', 'happy', 'very happy'], {
 		invalid_type_error: 'Please select a status.',
 	}),
   note: z.string().max(50, { message: 'Note must be less than 50 characters.' }),

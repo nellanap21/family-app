@@ -77,15 +77,15 @@ export default function EditLogForm({
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex items-center">
                 <input
-                  id="very sad"
+                  id="very unhappy"
                   name="status"
                   type="radio"
-                  value="very sad"
-                  defaultChecked={log.status === 'very sad'}
+                  value="very unhappy"
+                  defaultChecked={log.status === 'very unhappy'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
-                  htmlFor="very sad"
+                  htmlFor="very unhappy"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-600 px-3 py-1.5 text-xs font-medium text-white"
                 >
                   <FaRegFaceTired className="h-4 w-4" />
@@ -94,15 +94,15 @@ export default function EditLogForm({
 
               <div className="flex items-center">
                 <input
-                  id="sad"
+                  id="unhappy"
                   name="status"
                   type="radio"
-                  value="sad"
-                  defaultChecked={log.status === 'sad'}
+                  value="unhappy"
+                  defaultChecked={log.status === 'unhappy'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
-                  htmlFor="sad"
+                  htmlFor="unhappy"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-400 px-3 py-1.5 text-xs font-medium text-white"
                 >
                   <FaRegFaceFrown className="h-4 w-4" />

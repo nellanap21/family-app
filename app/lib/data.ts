@@ -195,8 +195,8 @@ export async function fetchFilteredMembers(query: string) {
 		  members.name,
 		  members.image_url,
 		  COUNT(logs.id) AS total_logs,
-		  SUM(CASE WHEN logs.status = 'very sad' THEN 1 ELSE 0 END) AS total_very_sad,
-      SUM(CASE WHEN logs.status = 'sad' THEN 1 ELSE 0 END) AS total_sad,
+		  SUM(CASE WHEN logs.status = 'very unhappy' THEN 1 ELSE 0 END) AS total_very_unhappy,
+      SUM(CASE WHEN logs.status = 'unhappy' THEN 1 ELSE 0 END) AS total_unhappy,
 		  SUM(CASE WHEN logs.status = 'meh' THEN 1 ELSE 0 END) AS total_meh,
 		  SUM(CASE WHEN logs.status = 'happy' THEN 1 ELSE 0 END) AS total_happy,
 		  SUM(CASE WHEN logs.status = 'very happy' THEN 1 ELSE 0 END) AS total_very_happy
@@ -210,7 +210,7 @@ export async function fetchFilteredMembers(query: string) {
 
     const members = data.map((member) => ({
       ...member,
-      total_sad: member.total_sad,
+      total_unhappy: member.total_unhappy,
       total_happy: member.total_happy,
     }));
 

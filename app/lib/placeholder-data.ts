@@ -58,12 +58,12 @@ const members = [
 // const logs = [
 //   {
 //     member_id: members[0].id,
-//     status: 'sad',
+//     status: 'unhappy',
 //     date: '2022-12-06',
 //   },
 //   {
 //     member_id: members[1].id,
-//     status: 'sad',
+//     status: 'unhappy',
 //     date: '2022-11-14',
 //   },
 //   {
@@ -78,17 +78,17 @@ const members = [
 //   },
 //   {
 //     member_id: members[5].id,
-//     status: 'sad',
+//     status: 'unhappy',
 //     date: '2023-08-05',
 //   },
 //   {
 //     member_id: members[2].id,
-//     status: 'sad',
+//     status: 'unhappy',
 //     date: '2023-07-16',
 //   },
 //   {
 //     member_id: members[0].id,
-//     status: 'very sad',
+//     status: 'very unhappy',
 //     date: '2023-06-27',
 //   },
 //   {

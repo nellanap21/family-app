@@ -45,8 +45,8 @@ export default async function MembersTable({
                     </div>
                     <div className="flex w-full items-center justify-between border-b py-5">
                       <div className="flex w-1/2 flex-col">
-                        <p className="text-xs">Sad</p>
-                        <p className="font-medium">{member.total_sad}</p>
+                        <p className="text-xs">Unhappy</p>
+                        <p className="font-medium">{member.total_unhappy}</p>
                       </div>
                       <div className="flex w-1/2 flex-col">
                         <p className="text-xs">Happy</p>
@@ -69,7 +69,7 @@ export default async function MembersTable({
                       Total Logs
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
-                      Total Sad
+                      Total Unhappy
                     </th>
                     <th scope="col" className="px-4 py-5 font-medium">
                       Total Happy
@@ -96,7 +96,7 @@ export default async function MembersTable({
                         {member.total_logs}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                        {member.total_sad}
+                        {member.total_unhappy}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                         {member.total_happy}

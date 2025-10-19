@@ -14,23 +14,23 @@ export default function LogStatus({ status }: { status: string }) {
       className={clsx(
         'inline-flex items-center rounded-full px-2 py-1 text-xs',
         {
-          'bg-red-600 text-white': status === 'very sad',
-          'bg-red-400 text-white': status === 'sad',
+          'bg-red-600 text-white': status === 'very unhappy',
+          'bg-red-400 text-white': status === 'unhappy',
           'bg-gray-300 text-gray-800': status === 'meh',
           'bg-sky-400 text-white': status === 'happy',
           'bg-blue-600 text-white': status === 'very happy',
         },
       )}
     >
-      {status === 'very sad' ? (
+      {status === 'very unhappy' ? (
         <>
-          Very Sad
+          Very Unhappy
           <FaRegFaceTired className="ml-1 w-4"/>
         </>
       ) : null}
-      {status === 'sad' ? (
+      {status === 'unhappy' ? (
         <>
-          Sad
+          Unhappy
           <FaRegFaceFrown className="ml-1 w-4"/>
         </>
       ) : null}

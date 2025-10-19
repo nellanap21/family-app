@@ -22,8 +22,7 @@ export type Log = {
   member_id: string;
   date: string;
   // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'sad' or 'happy'.
-  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
   note: string;
 };
 
@@ -37,7 +36,7 @@ export type LatestLog = {
   name: string;
   image_url: string;
   date: string;
-  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
 };
 
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
@@ -52,7 +51,7 @@ export type LogsTable = {
   image_url: string;
   date: string;
   amount: number;
-  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
   note: string;
 };
 
@@ -62,7 +61,7 @@ export type MembersTableType = {
   image_url: string;
   total_log: number;
   total_happy: number;
-  total_sad: number;
+  total_unhappy: number;
 };
 
 export type FormattedMembersTable = {
@@ -70,7 +69,7 @@ export type FormattedMembersTable = {
   name: string;
   image_url: string;
   total_logs: number;
-  total_sad: string;
+  total_unhappy: string;
   total_happy: string;
 };
 
@@ -83,6 +82,6 @@ export type LogForm = {
   id: string;
   member_id: string;
   amount: number;
-  status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
   note: string;
 };
