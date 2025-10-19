@@ -62,8 +62,8 @@ export async function fetchCardData() {
         SUM(CASE WHEN status = 'very happy' THEN 1 ELSE 0 END) AS "veryhappy",
         SUM(CASE WHEN status = 'happy' THEN 1 ELSE 0 END) AS "happy",
         SUM(CASE WHEN status = 'meh' THEN 1 ELSE 0 END) AS "meh",
-        SUM(CASE WHEN status = 'sad' THEN 1 ELSE 0 END) AS "sad",
-        SUM(CASE WHEN status = 'very sad' THEN 1 ELSE 0 END) AS "verysad"
+        SUM(CASE WHEN status = 'unhappy' THEN 1 ELSE 0 END) AS "unhappy",
+        SUM(CASE WHEN status = 'very unhappy' THEN 1 ELSE 0 END) AS "veryunhappy"
         FROM logs`;
 
     const data = await Promise.all([
@@ -74,8 +74,8 @@ export async function fetchCardData() {
 
     const numberOfLogs = Number(data[0][0].count ?? '0');
     const numberOfMembers = Number(data[1][0].count ?? '0');
-    const totalVerySadLogs = data[2][0].verysad ?? '0';
-    const totalSadLogs = data[2][0].sad ?? '0';
+    const totalVeryUnhappyLogs = data[2][0].veryunhappy ?? '0';
+    const totalUnhappyLogs = data[2][0].unhappy ?? '0';
     const totalMehLogs = data[2][0].meh ?? '0';
     const totalHappyLogs = data[2][0].happy ?? '0';
     const totalVeryHappyLogs = data[2][0].veryhappy ?? '0';
@@ -83,8 +83,8 @@ export async function fetchCardData() {
     return {
       numberOfMembers,
       numberOfLogs,
-      totalVerySadLogs,
-      totalSadLogs,
+      totalVeryUnhappyLogs,
+      totalUnhappyLogs,
       totalMehLogs,    
       totalHappyLogs,
       totalVeryHappyLogs,
