@@ -4,6 +4,7 @@ import { MemberField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
   UserCircleIcon,
+  PencilSquareIcon
 } from '@heroicons/react/24/outline';
 import { 
   FaRegFaceSmileBeam,
@@ -61,7 +62,7 @@ export default function Form({ members }: { members: MemberField[] }) {
         </div>
 
         {/* Log Status */}
-        <fieldset>
+        <fieldset className="mb-4">
           <legend className="mb-2 block text-sm font-medium">
             Set the log status
           </legend>
@@ -159,7 +160,26 @@ export default function Form({ members }: { members: MemberField[] }) {
             ))}
           </div>
         </fieldset>
-        {/* you can access the errors using the form state. */}
+
+        {/* Log Note*/}
+        <div className="mb-4">
+          <label htmlFor="note" className="mb-2 block text-sm font-medium">
+            Note
+          </label>
+          <div className="relative">
+
+          <textarea
+            id="note"
+            name="note"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"  
+            rows={1}
+            placeholder="Enter a note"
+            maxLength={50}
+          />
+          <PencilSquareIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+
+          </div>
+        </div>
         <div id="overall-error" aria-live="polite" aria-atomic="true">
           {state.message && (
             <p className="mt-2 text-sm text-red-500">{state.message}</p>

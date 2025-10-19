@@ -23,6 +23,7 @@ const FormSchema = z.object({
   status: z.enum(['very sad', 'sad', 'meh', 'happy', 'very happy'], {
 		invalid_type_error: 'Please select a status.',
 	}),
+  note: z.string().max(50, { message: 'Note must be less than 50 characters.' }),
   date: z.string(),
 });
 
@@ -33,16 +34,18 @@ export type State = {
   errors?: {
     memberId?: string[];
     status?: string[];
+    note?: string[];
   };
   message?: string | null;
 };
 
 // extract the values of formData
 export async function createLog(prevState: State, formData: FormData) {
-  // pass  raw form data to CreateLog to validate the types:
+  // pass raw form data to CreateLog to validate the types:
   const validatedFields = CreateLog.safeParse({
     memberId: formData.get('memberId'),
     status: formData.get('status'),
+    note: formData.get('note'),
   });
 
 	// If form validation fails, return errors early. Otherwise, continue.
@@ -53,14 +56,14 @@ export async function createLog(prevState: State, formData: FormData) {
     };
   }
 
-	const { memberId, status } = validatedFields.data;
+	const { memberId, status, note } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0]; // create a new date with the format "YYYY-MM-DD"
 
   try {
     // runs sql query to insert a new log into the database
     await sql`
-        INSERT INTO logs (member_id, status, date)
-        VALUES (${memberId}, ${status}, ${date})
+        INSERT INTO logs (member_id, status, note, date)
+        VALUES (${memberId}, ${status}, ${note}, ${date})
     `;
   } catch (error) {
     // We'll also log the error to the console for now
