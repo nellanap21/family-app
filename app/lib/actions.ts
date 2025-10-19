@@ -94,6 +94,7 @@ export async function updateLog(
 	const validatedFields = UpdateLog.safeParse({
     memberId: formData.get('memberId'),
     status: formData.get('status'),
+    note: formData.get('note')
   });
  
 	if (!validatedFields.success) {
@@ -103,12 +104,12 @@ export async function updateLog(
 		};
 	}
 
-	const { memberId, status } = validatedFields.data;
+	const { memberId, status, note } = validatedFields.data;
  
   try {
     await sql`
         UPDATE logs
-        SET member_id = ${memberId}, status = ${status}
+        SET member_id = ${memberId}, status = ${status}, note = ${note}
         WHERE id = ${id}
     `;
   } catch (error) {

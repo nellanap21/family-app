@@ -180,6 +180,8 @@ export default function Form({ members }: { members: MemberField[] }) {
 
           </div>
         </div>
+
+        {/* Overall Form Errors*/}
         <div id="overall-error" aria-live="polite" aria-atomic="true">
           {state.message && (
             <p className="mt-2 text-sm text-red-500">{state.message}</p>

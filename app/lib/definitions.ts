@@ -24,7 +24,7 @@ export type Log = {
   // In TypeScript, this is called a string union type.
   // It means that the "status" property can only be one of the two strings: 'sad' or 'happy'.
   status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
-
+  note: string;
 };
 
 export type Revenue = {
@@ -83,4 +83,5 @@ export type LogForm = {
   member_id: string;
   amount: number;
   status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  note: string;
 };

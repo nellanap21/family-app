@@ -5,14 +5,15 @@ import { notFound } from 'next/navigation';
  
 // page components also accept a prop called params which you can use to access the id
 export default async function Page(props: { params: Promise<{ id: string }> }) {
+  // Unwraps the params object.
+	// Extracts the id (the log ID from the URL).
   const params = await props.params;
   const id = params.id;
-	console.log(id);
 
 	// use Promise.all to fetch both the invoice and customers in parallel
   const [log, members] = await Promise.all([
     fetchLogById(id),
-    fetchMembers(), // fetch the customer names for the dropdown.
+    fetchMembers(), 
   ]);
 
 	// check if the log has not been found

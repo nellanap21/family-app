@@ -152,7 +152,8 @@ export async function fetchLogById(id: string) {
       SELECT
         logs.id,
         logs.member_id,
-        logs.status
+        logs.status,
+        logs.note
       FROM logs
       WHERE logs.id = ${id};
     `;
