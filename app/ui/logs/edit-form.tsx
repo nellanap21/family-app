@@ -69,7 +69,7 @@ export default function EditLogForm({
         </div>
 
         {/* Log Status */}
-        <fieldset>
+        <fieldset className="mb-4">
           <legend className="mb-2 block text-sm font-medium">
             Set the log status
           </legend>
