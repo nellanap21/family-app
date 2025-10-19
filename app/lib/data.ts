@@ -108,6 +108,7 @@ export async function fetchFilteredLogs(
         logs.id,
         logs.date,
         logs.status,
+        logs.note,
         members.name,
         members.image_url
       FROM logs

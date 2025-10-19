@@ -53,6 +53,7 @@ export type LogsTable = {
   date: string;
   amount: number;
   status: 'very sad' | 'sad' | 'meh' | 'happy' | 'very happy';
+  note: string;
 };
 
 export type MembersTableType = {
