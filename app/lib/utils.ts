@@ -9,6 +9,7 @@ export const formatDateToLocal = (
     day: 'numeric',
     month: 'short',
     year: 'numeric',
+    timeZone: 'America/Los_Angeles',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
@@ -24,6 +25,7 @@ export const formatTimeToLocal = (
     minute: '2-digit',
     second: '2-digit',
     hour12: true,
+    timeZone: 'America/Los_Angeles',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
