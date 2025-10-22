@@ -34,7 +34,7 @@ export async function fetchLatestLogs() {
   try {
     // tells TypeScript the result will be an array of LatestLogRaw objects
     const data = await sql<LatestLogRaw[]>` 
-      SELECT members.name, members.image_url, logs.id, logs.status, logs.date
+      SELECT members.name, members.image_url, logs.id, logs.status, logs.date, logs.timestamp
       FROM logs
       JOIN members ON logs.member_id = members.id
       ORDER BY logs.date DESC
@@ -107,6 +107,7 @@ export async function fetchFilteredLogs(
       SELECT
         logs.id,
         logs.date,
+        logs.timestamp,
         logs.status,
         logs.note,
         members.name,

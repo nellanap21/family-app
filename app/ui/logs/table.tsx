@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { UpdateLog, DeleteLog } from '@/app/ui/logs/buttons';
 import LogStatus from '@/app/ui/logs/status';
-import { formatDateToLocal } from '@/app/lib/utils';
+import { formatDateToLocal, formatTimeToLocal } from '@/app/lib/utils';
 import { fetchFilteredLogs } from '@/app/lib/data';
 
 export default async function LogsTable({
@@ -52,7 +52,7 @@ export default async function LogsTable({
                 {/* Bottom section: Date + Actions */}
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p>{formatDateToLocal(log.date)}</p>
+                    <p>{formatDateToLocal(log.timestamp)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <UpdateLog id={log.id} />
@@ -71,6 +71,9 @@ export default async function LogsTable({
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Timestamp
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
@@ -105,7 +108,12 @@ export default async function LogsTable({
 
                   {/* Date column */}
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(log.date)}
+                    {formatDateToLocal(log.timestamp)}
+                  </td>
+
+                  {/* Timestamp column */}
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {formatTimeToLocal(log.timestamp)}
                   </td>
 
                   {/* Status column */}

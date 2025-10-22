@@ -44,7 +44,7 @@ export default async function LatestLogs() {
                     </p>
                     {/* React cannot directly render a JavaScript Date object. */}
                     <p className="hidden text-sm tex-gray-500 sm:block">
-                      {formatDateToLocal(log.date)}
+                      {formatDateToLocal(log.timestamp)}
                     </p>
                   </div>
                 </div>

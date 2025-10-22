@@ -57,13 +57,13 @@ export async function createLog(prevState: State, formData: FormData) {
   }
 
 	const { memberId, status, note } = validatedFields.data;
-  const date = new Date().toISOString().split('T')[0]; // create a new date with the format "YYYY-MM-DD"
+  const date = new Date().toISOString(); 
 
   try {
     // runs sql query to insert a new log into the database
     await sql`
-        INSERT INTO logs (member_id, status, note, date)
-        VALUES (${memberId}, ${status}, ${note}, ${date})
+        INSERT INTO logs (member_id, status, note, date, timestamp)
+        VALUES (${memberId}, ${status}, ${note}, ${date}, ${date})
     `;
   } catch (error) {
     // We'll also log the error to the console for now

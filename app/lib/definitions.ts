@@ -36,6 +36,7 @@ export type LatestLog = {
   name: string;
   image_url: string;
   date: string;
+  timestamp: string;
   status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
 };
 
@@ -50,6 +51,7 @@ export type LogsTable = {
   name: string;
   image_url: string;
   date: string;
+  timestamp: string;
   amount: number;
   status: 'very unhappy' | 'unhappy' | 'meh' | 'happy' | 'very happy';
   note: string;
