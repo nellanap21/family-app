@@ -5,7 +5,7 @@ import { fetchCardData } from '@/app/lib/data';
 import { Suspense } from 'react';
 import { LatestLogsSkeleton, CardsSkeleton } from '@/app/ui/skeletons';
 import CardWrapper from '@/app/ui/dashboard/cards';
-
+import Calendar from '@/app/ui/dashboard/calendars';
 
 // The page is an async server component. This allows you to use await to fetch data.
 // wrap components in suspense and have a fallback skeleton
@@ -20,6 +20,9 @@ export default async function Page() {
         <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
         </Suspense>
+      </div>
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+        <Calendar />
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <Suspense fallback={<LatestLogsSkeleton />}>
