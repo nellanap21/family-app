@@ -71,19 +71,39 @@ function buildMonthMatrix(year: number, month: number) {
 }
 
 
-// Helper function to get status icon
+// Helper function to get status icon with color scheme
 function getStatusIcon(status: string) {
   switch (status) {
     case 'very unhappy':
-      return <FaRegFaceTired className="w-4 h-4" />;
+      return (
+        <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-600 text-white">
+          <FaRegFaceTired className="w-3 h-3" />
+        </div>
+      );
     case 'unhappy':
-      return <FaRegFaceFrown className="w-4 h-4" />;
+      return (
+        <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-400 text-white">
+          <FaRegFaceFrown className="w-3 h-3" />
+        </div>
+      );
     case 'meh':
-      return <FaRegFaceMeh className="w-4 h-4" />;
+      return (
+        <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-300 text-gray-800">
+          <FaRegFaceMeh className="w-3 h-3" />
+        </div>
+      );
     case 'happy':
-      return <FaRegFaceSmile className="w-4 h-4" />;
+      return (
+        <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-sky-400 text-white">
+          <FaRegFaceSmile className="w-3 h-3" />
+        </div>
+      );
     case 'very happy':
-      return <FaRegFaceSmileBeam className="w-4 h-4" />;
+      return (
+        <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white">
+          <FaRegFaceSmileBeam className="w-3 h-3" />
+        </div>
+      );
     default:
       return null;
   }
