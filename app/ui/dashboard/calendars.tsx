@@ -7,6 +7,8 @@ import {
   FaRegFaceFrown,
   FaRegFaceTired   
 } from "react-icons/fa6";
+import { fetchMembers, fetchMemberLogsForMonth } from '@/app/lib/data';
+import { MemberField } from '@/app/lib/definitions';
 
 const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -69,24 +71,57 @@ function buildMonthMatrix(year: number, month: number) {
 }
 
 
-export default function Calendar({
+// Helper function to get status icon
+function getStatusIcon(status: string) {
+  switch (status) {
+    case 'very unhappy':
+      return <FaRegFaceTired className="w-4 h-4" />;
+    case 'unhappy':
+      return <FaRegFaceFrown className="w-4 h-4" />;
+    case 'meh':
+      return <FaRegFaceMeh className="w-4 h-4" />;
+    case 'happy':
+      return <FaRegFaceSmile className="w-4 h-4" />;
+    case 'very happy':
+      return <FaRegFaceSmileBeam className="w-4 h-4" />;
+    default:
+      return null;
+  }
+}
 
+export default async function Calendar({
+  memberId,
+  year = new Date().getFullYear(),
+  month = new Date().getMonth()
+}: {
+  memberId?: string;
+  year?: number;
+  month?: number;
 }) {
+  // Fetch members and logs data
+  const members = await fetchMembers();
+  const selectedMember = memberId ? members.find(m => m.id === memberId) : members[0];
+  const memberLogs = selectedMember ? await fetchMemberLogsForMonth(selectedMember.id, year, month) : [];
 
-		const cells = buildMonthMatrix(2025, 9);
+  // Create a map of date to status for quick lookup
+  const logsByDate = new Map();
+  memberLogs.forEach(log => {
+    const day = new Date(log.date).getDate();
+    logsByDate.set(day, log.status);
+  });
 
-		const monthName = new Date(2025, 9, 1).toLocaleString("en-US", { month: "long" });
-		console.log(monthName);
+  const cells = buildMonthMatrix(year, month);
+  const monthName = new Date(year, month, 1).toLocaleString("en-US", { month: "long" });
 
     return (
         <div className="flex w-full flex-col md:col-span-4">
             <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-                Test Calendar
+                {selectedMember ? `${selectedMember.name}'s Calendar` : 'Calendar'}
             </h2>
             <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
                 <div className="bg-white px-6">
                     {/* Header */}
-                    <div className="mb-1 flex justify-between px-1">
+                    <div className="mb-1 flex justify-between px-1 py-4">
                         <button className="rounded p-1 hover:bg-gray-100" aria-label="Previous month">
 													<ChevronLeftIcon className="h-5 w-5 text-gray-500" />
                         </button>
@@ -104,29 +139,38 @@ export default function Calendar({
 										</div>
 
 										{/* Grid */}
-										<div className="grid grid-cols-7">
+										<div className="grid grid-cols-7 py-4">
 											{cells.map((c, idx) => {
 												const inMonth = c.inCurrentMonth;
+												const dayStatus = inMonth ? logsByDate.get(c.day) : null;
 
 												return (
 													<div
 														key={idx}
-														className="relative aspect-square border border-slate-400"
+														className={`relative aspect-square border border-slate-400 ${
+															inMonth ? 'bg-white' : 'bg-gray-100'
+														}`}
 													>
 														{/* Day number (top-left) */}
-														<div className="absolute left-1 top-1">
+														<div className={`absolute left-1 top-1 text-xs ${
+															inMonth ? 'text-gray-900' : 'text-gray-400'
+														}`}>
 															{c.day}
 														</div>	
 
-														{/* Mood icon */}
+														{/* Status icon */}
 														<div className="flex h-full items-center justify-center">
-															<FaRegFaceSmile className="w-4 mt-3"/>
+															{dayStatus ? (
+																<div className="mt-3">
+																	{getStatusIcon(dayStatus)}
+																</div>
+															) : inMonth ? (
+																<div className="mt-3 w-4 h-4 rounded-full bg-gray-200"></div>
+															) : null}
 														</div>
 													</div>
 												)
-											})
-
-											}
+											})}
 										</div>
                 </div>
             </div>

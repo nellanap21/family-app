@@ -221,3 +221,24 @@ export async function fetchFilteredMembers(query: string) {
     throw new Error('Failed to fetch member table.');
   }
 }
+
+export async function fetchMemberLogsForMonth(memberId: string, year: number, month: number) {
+  try {
+    const startDate = new Date(year, month, 1).toISOString().split('T')[0];
+    const endDate = new Date(year, month + 1, 0).toISOString().split('T')[0];
+    
+    const data = await sql<{date: string, status: string}[]>`
+      SELECT logs.date, logs.status
+      FROM logs
+      WHERE logs.member_id = ${memberId}
+        AND logs.date >= ${startDate}
+        AND logs.date <= ${endDate}
+      ORDER BY logs.date ASC
+    `;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch member logs for month.');
+  }
+}

@@ -16,13 +16,14 @@ export default async function Page() {
       {/* <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
         Dashboard
       </h1> */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <Suspense fallback={<CardsSkeleton />}>
+      {/* <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
-        </Suspense> */}
-      </div>
+        </Suspense>
+      </div> */}
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <Calendar />
+        <Calendar memberId="8e4bb515-ef8a-487f-b07f-1799c56da54c"/>
+        <Calendar memberId="c97d7f7b-06a3-4bf9-b4ac-7286269d9be8"/>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <Suspense fallback={<LatestLogsSkeleton />}>
