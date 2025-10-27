@@ -15,6 +15,19 @@ export const formatDateToLocal = (
   return formatter.format(date);
 };
 
+export const formatDayToLocal = (
+  dateStr: string,
+  locale: string = 'en-US',
+) => {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    timeZone: 'America/Los_Angeles',
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+};
+
 export const formatTimeToLocal = (
   dateStr: string,
   locale: string = 'en-US',

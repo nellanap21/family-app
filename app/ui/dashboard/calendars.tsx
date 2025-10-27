@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa6";
 import { fetchMembers, fetchMemberLogsForMonth } from '@/app/lib/data';
 import { MemberField } from '@/app/lib/definitions';
+import { formatDayToLocal } from '@/app/lib/utils';
 
 const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -122,14 +123,13 @@ export default async function Calendar({
   const members = await fetchMembers();
   const selectedMember = memberId ? members.find(m => m.id === memberId) : members[0];
   const memberLogs = selectedMember ? await fetchMemberLogsForMonth(selectedMember.id, year, month) : [];
-
   // Create a map of date to status for quick lookup
   const logsByDate = new Map();
   memberLogs.forEach(log => {
-    const day = new Date(log.date).getDate();
+		const day = Number(formatDayToLocal(log.timestamp))
     logsByDate.set(day, log.status);
   });
-
+	console.log(logsByDate);
   const cells = buildMonthMatrix(year, month);
   const monthName = new Date(year, month, 1).toLocaleString("en-US", { month: "long" });
 
@@ -143,11 +143,11 @@ export default async function Calendar({
                     {/* Header */}
                     <div className="mb-1 flex justify-between px-1 py-4">
                         <button className="rounded p-1 hover:bg-gray-100" aria-label="Previous month">
-													<ChevronLeftIcon className="h-5 w-5 text-gray-500" />
+												<ChevronLeftIcon className="h-5 w-5 text-gray-500" />
                         </button>
 												<h3 className="text-lg">{monthName.toUpperCase()}</h3>
 												<button className="rounded p-1 hover:bg-gray-100" aria-label="Previous month">
-													<ChevronRightIcon className="h-5 w-5 text-gray-500" />
+												<ChevronRightIcon className="h-5 w-5 text-gray-500" />
                         </button>
                     </div>
 

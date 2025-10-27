@@ -227,8 +227,8 @@ export async function fetchMemberLogsForMonth(memberId: string, year: number, mo
     const startDate = new Date(year, month, 1).toISOString().split('T')[0];
     const endDate = new Date(year, month + 1, 0).toISOString().split('T')[0];
     
-    const data = await sql<{date: string, status: string}[]>`
-      SELECT logs.date, logs.status
+    const data = await sql<{date: string, timestamp: string, status: string}[]>`
+      SELECT logs.date, logs.timestamp, logs.status
       FROM logs
       WHERE logs.member_id = ${memberId}
         AND logs.date >= ${startDate}
